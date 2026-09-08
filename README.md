@@ -1,32 +1,40 @@
-# React + TypeScript + Vite
+# 📌 Advice Generator App
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+## 📝 Descripción
+Este proyecto es una solución al reto **Advice Generator App** de [Frontend Mentor](https://www.frontendmentor.io/). La aplicación consume la [Advice Slip API](https://api.adviceslip.com/) para mostrar un consejo aleatorio cada vez que el usuario presiona el botón de dado. El objetivo principal fue construir una interfaz responsive (mobile → desktop) totalmente tipada con TypeScript estricto, sin usar `any` en ningún punto del código, y con un sistema de diseño propio armado a mano sobre Tailwind CSS v4.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 📸 Capturas de pantalla
 
-## React Compiler
+### 📱 Vista Mobile
+![Mobile](./src/assets/screenshots/mobile.png)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 💻 Vista Desktop
+![Desktop](./src/assets/screenshots/desktop.png)
 
-## Expanding the Oxlint configuration
+---
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## 🛠 Tecnologías utilizadas
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Oxlint
+- pnpm
+- Advice Slip API
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+---
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## 🚀 Retos
+El mayor reto fue tipar correctamente la respuesta de la API sin recurrir a `any`, ya que configuré TypeScript en modo `strict` con la regla de lint `no-explicit-any` activada. Terminé resolviéndolo con funciones *type guard* (`isAdvice`, `isSlip`) que validan la forma del `unknown` que devuelve `fetch` antes de usarlo como `Advice`. Otro desafío fue maquetar la card mobile-first y luego adaptarla a desktop sin duplicar lógica: usé clases `md:` de Tailwind para cambiar tamaños de texto, paddings y anchos, y dos imágenes de divisor (mobile/desktop) que se alternan según el breakpoint solo con CSS, sin JavaScript. También armé mis propios `@theme` y `@utility` en Tailwind v4 para los colores y los *text presets* del estilo guía, en vez de usar clases sueltas repetidas por todo el componente.
+
+---
+
+## 📚 Aprendizajes
+Aprendí a configurar Tailwind CSS v4 en su modo "CSS-first", usando `@theme` para definir tokens de color y tipografía personalizados y `@utility` para crear clases reutilizables con `@apply`. También reforcé el uso de *type predicates* (`data is Advice`) en TypeScript como alternativa segura a `any` cuando se trabaja con datos externos de una API, y practiqué el manejo de estados de carga (`isLoading`) y deshabilitado del botón mientras se espera la respuesta del fetch.
+
+---
+
+## 👨‍💻 Autor
+**Anguiano**
